@@ -26,7 +26,6 @@ const AppRoutes: React.FC = () => {
                         <Navbar>
                             <Home />
                         </Navbar>
-
                     </>} />
                     <Route path="/products" element={<>
                         <Navbar>
@@ -35,7 +34,6 @@ const AppRoutes: React.FC = () => {
 
                             </ProductsListProvider>
                         </Navbar>
-
                     </>} />
                 </Routes>
             </AuthenticationProvider>

@@ -22,7 +22,7 @@ const Signin: React.FC = () => {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const { authenticate } = useContext<AuthenticationContextProps>(AuthenticationContext);
+    const { authenticate, authenticating } = useContext<AuthenticationContextProps>(AuthenticationContext);
     const { setCurrentScreen } = useContext<AuthenticationPageContextProps>(AuthenticationPageContext);
 
     const goToSignUp = () => setCurrentScreen('signup')
@@ -63,6 +63,7 @@ const Signin: React.FC = () => {
                                 <Checkbox>Remember me</Checkbox>
                             </Stack>
                             <Button
+                                disabled={authenticating}
                                 onClick={login}
                                 bg={'blue.400'}
                                 color={'white'}

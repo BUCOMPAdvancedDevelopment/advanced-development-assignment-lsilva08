@@ -34,7 +34,7 @@ const Signup: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [wrongConfirmPassword, setWrongConfirmPassword] = useState<boolean>(false);
 
-    const { register } = useContext<AuthenticationContextProps>(AuthenticationContext);
+    const { register, authenticating } = useContext<AuthenticationContextProps>(AuthenticationContext);
     const { setCurrentScreen } = useContext<AuthenticationPageContextProps>(AuthenticationPageContext);
     const backToSignIn = () => setCurrentScreen('signin')
 
@@ -125,6 +125,7 @@ const Signup: React.FC = () => {
                         <Stack spacing={10} pt={2}>
                             <Button
                                 onClick={signup}
+                                disabled={authenticating}
                                 loadingText="Submitting"
                                 size="lg"
                                 bg={'blue.400'}

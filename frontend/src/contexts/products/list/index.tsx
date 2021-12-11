@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import * as _ from 'lodash';
-import { Product } from '../../../typings/products';
+import { Product } from '../../../typings';
 import { findProducts } from '../../../services/products.service';
 
 export interface ProductListContextProps {
