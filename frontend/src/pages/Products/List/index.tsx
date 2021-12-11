@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, StackDivider, VStack } from '@chakra-ui/layout';
+import { Box, SimpleGrid, Divider, VStack } from '@chakra-ui/layout';
 import React, { useContext, useEffect } from 'react';
 
 import { ProductListContextProps, ProductListContext } from '../../../contexts/products/list'
@@ -17,12 +17,11 @@ const ProductsList: React.FC = () => {
 
   useEffect(() => {
     loadProducts();
-    return () => {}
+    return () => { }
   }, [])
 
   return (
     <VStack
-      divider={<StackDivider borderColor='gray.200' />}
       spacing={4}
       align='stretch'
     >
@@ -49,6 +48,7 @@ const ProductsList: React.FC = () => {
         }
 
       </Box>
+      <Divider borderColor='gray.200' />
       <Box>
         <ProductPagination />
       </Box>

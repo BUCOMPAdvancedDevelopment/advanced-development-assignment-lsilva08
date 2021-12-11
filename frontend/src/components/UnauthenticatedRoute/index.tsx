@@ -9,7 +9,7 @@ const UnauthenticatedRoute: React.FC = ({ children }) => {
     const { authenticated } = useContext<AuthenticationContextProps>(AuthenticationContext);
 
     if (authenticated) {
-        return <Navigate replace to="/home" />
+        return <Navigate replace to="/products" />
     }
 
     return <>{children}</>;
