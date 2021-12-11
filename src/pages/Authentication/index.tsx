@@ -1,15 +1,19 @@
-import React, { useContext } from 'react';
-import { AuthenticationContext, AuthenticationContextProps } from '../../contexts/authentication';
+import React, { useContext, useMemo } from 'react';
+import { AuthenticationPageContext, AuthenticationPageContextProps } from '../../contexts/authentication/page';
 import UnauthenticatedRoute from '../../components/UnauthenticatedRoute';
-
-// import { Container } from './styles';
+import Signin from './components/Signin';
+import Signup from './components/Signup';
 
 const Authentication: React.FC = () => {
 
-    const { authenticated } = useContext<AuthenticationContextProps>(AuthenticationContext);
+    const { currentScreen } = useContext<AuthenticationPageContextProps>(AuthenticationPageContext);
+
+    const renderedScreen = useMemo(() => {
+        return currentScreen === 'signin' ? <Signin /> : <Signup />
+    }, [currentScreen])
 
     return <UnauthenticatedRoute>
-        <div>Logado: {authenticated ? "Sim" : "Não"}</div>
+        {renderedScreen}
     </UnauthenticatedRoute>
 }
 

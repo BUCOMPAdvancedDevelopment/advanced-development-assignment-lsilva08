@@ -5,6 +5,7 @@ import {
     Route
 } from "react-router-dom";
 import AuthenticationProvider from '../../contexts/authentication';
+import AuthenticationPageProvider from '../../contexts/authentication/page';
 import ProductsListProvider from '../../contexts/products/list';
 import Authentication from '../../pages/Authentication';
 import Home from '../../pages/Home';
@@ -16,7 +17,11 @@ const AppRoutes: React.FC = () => {
         <div>
             <AuthenticationProvider>
                 <Routes>
-                    <Route path="/" element={<Authentication />} />
+                    <Route path="/" element={
+                        <AuthenticationPageProvider>
+                            <Authentication />
+                        </AuthenticationPageProvider>
+                    } />
                     <Route path="/home" element={<>
                         <Navbar>
                             <Home />

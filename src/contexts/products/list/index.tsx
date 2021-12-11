@@ -33,28 +33,23 @@ const ProductsListProvider: React.FC = ({ children }) => {
 
   const loadProducts = async () => {
     setLoadingProducts(true);
-    setTimeout(async () => {
-      const foundProducts = await findProducts();
-      setProducts(foundProducts);
-      setLoadingProducts(false);
-    }, 3000)
+    const foundProducts = await findProducts();
+    setProducts(foundProducts);
+    setLoadingProducts(false);
   }
 
   const filteredProducts = useMemo(() => {
     const productsChunked = _.chunk(
       products.filter(product => filter ? product.name.includes(filter) : true),
-      8);
+      8
+    );
     setPages(productsChunked.length);
     return productsChunked[currentPage];
   }, [filter, products, currentPage])
 
-  const changePage = (nextPage: number) => {
-    setCurrentPage(nextPage);
-  }
+  const changePage = (nextPage: number) => setCurrentPage(nextPage);
 
-  const filterProductsList = (filter: string) => {
-    setFilter(filter);
-  }
+  const filterProductsList = (filter: string) => setFilter(filter);
 
   return <ProductListContext.Provider value={{
     products: filteredProducts,
