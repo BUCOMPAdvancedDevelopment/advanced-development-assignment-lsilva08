@@ -5,7 +5,7 @@ import { ProductListContextProps, ProductListContext } from '../../../contexts/p
 import ProductPagination from './components/ProductPagination';
 import ProductFilter from './components/ProductFilter';
 import ProductCard from './components/ProductCard';
-import { Spinner } from '@chakra-ui/spinner';
+import Loader from '../../../components/Loader';
 
 // import { Container } from './styles';
 
@@ -30,13 +30,7 @@ const ProductsList: React.FC = () => {
       </Box>
       <Box>
         {loadingProducts
-          ? <Box mt="50" mb="50" w="100%" textAlign="center" ><Spinner
-            thickness='4px'
-            speed='0.65s'
-            emptyColor='gray.200'
-            color='blue.500'
-            size='xl'
-          /></Box>
+          ? <Box mt="50" mb="50" w="100%" textAlign="center" ><Loader /></Box>
           :
           <SimpleGrid columns={[2, 2, 2, 4]} spacing={10}>
             {

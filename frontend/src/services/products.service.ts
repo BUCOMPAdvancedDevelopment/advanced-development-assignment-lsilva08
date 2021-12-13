@@ -20,3 +20,12 @@ export const findProducts = async (): Promise<any> => {
         { name: 'test18', price: 10.0 },
     ]
 }
+
+export const findProductById = async (productId: number): Promise<any> => {
+    return { id: productId, name: 'test7', price: 10.0 }
+}
+
+export const buyProduct = async (userId: number, productId: number, quantity: number): Promise<any> => {
+    console.log(`Buying ${quantity} of product ${productId} for user ${userId}`)
+    return true;
+}
