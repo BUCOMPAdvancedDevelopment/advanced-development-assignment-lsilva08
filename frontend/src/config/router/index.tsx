@@ -10,7 +10,6 @@ import ProductsListProvider from '../../contexts/products/list';
 import Authentication from '../../pages/Authentication';
 import Navbar from '../../components/Navbar';
 import ProductsList from '../../pages/Products/List';
-import ProductsTable from '../../pages/Products/Table';
 import ProductDetailsContextProvider from '../../contexts/products/details';
 import ProductsDetail from '../../pages/Products/Detail';
 
@@ -26,7 +25,7 @@ const AppRoutes: React.FC = () => {
                 <Route path="/products" element={
                     <Navbar>
                         <ProductsListProvider>
-                            <ProductsTable />
+                            <ProductsList />
                         </ProductsListProvider>
                     </Navbar>
                 } />

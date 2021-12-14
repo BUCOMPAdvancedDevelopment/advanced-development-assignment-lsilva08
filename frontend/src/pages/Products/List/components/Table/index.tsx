@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ProductListContext, ProductListContextProps } from '../../../contexts/products/list';
+import { ProductListContext, ProductListContextProps } from '../../../../../contexts/products/list';
 import ProductsTableTable from './components/Table';
 
 const ProductsTable: React.FC = () => {

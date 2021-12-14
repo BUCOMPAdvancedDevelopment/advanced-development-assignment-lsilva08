@@ -28,7 +28,7 @@ const AuthenticationProvider: React.FC = ({ children }) => {
     const [authenticated, setAuthenticated] = useState<boolean>(false);
     const [token, setToken] = useState<string>();
     const [user, setUser] = useState<{ id: number, email: string }>({ id: 1, email: 'test' });
-    const [profile, setProfile] = useState<string>('user');
+    const [profile, setProfile] = useState<string>('');
 
     const authenticate = async (email: string, password: string) => {
         setAuthenticating(true);

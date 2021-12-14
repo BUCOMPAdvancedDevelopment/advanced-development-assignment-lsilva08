@@ -1,7 +1,7 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useToast } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
-import { ProductListContext, ProductListContextProps } from '../../../../../contexts/products/list';
-import { ProductUpsertContext, ProductUpsertContextProps } from '../../../../../contexts/products/upsert';
+import { ProductListContext, ProductListContextProps } from '../../../../../../../contexts/products/list';
+import { ProductUpsertContext, ProductUpsertContextProps } from '../../../../../../../contexts/products/upsert';
 
 // import { Container } from './styles';
 

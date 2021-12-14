@@ -1,10 +1,10 @@
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Tfoot, HStack, IconButton, Button, useDisclosure } from '@chakra-ui/react'
 import React, { useContext } from 'react';
-import { Product } from '../../../../../typings';
-import { ProductListContext, ProductListContextProps } from '../../../../../contexts/products/list';
+import { Product } from '../../../../../../../typings';
+import { ProductListContext, ProductListContextProps } from '../../../../../../../contexts/products/list';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import UpsertDialog from '../UpsertDialog';
-import ProductsUpsertProvider from '../../../../../contexts/products/upsert';
+import ProductsUpsertProvider from '../../../../../../../contexts/products/upsert';
 
 const ProductsTableTable: React.FC = () => {
 

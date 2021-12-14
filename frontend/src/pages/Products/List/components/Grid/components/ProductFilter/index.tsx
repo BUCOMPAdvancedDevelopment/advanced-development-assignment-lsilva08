@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
 import React, { useContext, useState } from 'react';
-import { ProductListContext, ProductListContextProps } from '../../../../../contexts/products/list';
+import { ProductListContext, ProductListContextProps } from '../../../../../../../contexts/products/list';
 
 // import { Container } from './styles';
 

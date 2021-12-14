@@ -9,7 +9,7 @@ import {
     Tooltip,
 } from '@chakra-ui/react';
 import { FiShoppingCart } from 'react-icons/fi';
-import { Product } from '../../../../../typings';
+import { Product } from '../../../../../../../typings';
 
 interface ProductCardProps {
     product: Product;
