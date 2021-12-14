@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { AuthenticationPageContext, AuthenticationPageContextProps } from '../../contexts/authentication/page';
-import UnauthenticatedRoute from '../../components/UnauthenticatedRoute';
+import UnauthenticatedRoute from '../../components/RouteWrappers/UnauthenticatedRoute';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 

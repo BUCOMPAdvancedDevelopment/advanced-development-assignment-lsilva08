@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {
     Navigate
 } from "react-router-dom";
-import { AuthenticationContext, AuthenticationContextProps } from '../../contexts/authentication';
+import { AuthenticationContext, AuthenticationContextProps } from '../../../contexts/authentication';
 
 const UnauthenticatedRoute: React.FC = ({ children }) => {
 

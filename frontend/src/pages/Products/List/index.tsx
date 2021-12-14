@@ -7,8 +7,6 @@ import ProductFilter from './components/ProductFilter';
 import ProductCard from './components/ProductCard';
 import Loader from '../../../components/Loader';
 
-// import { Container } from './styles';
-
 const ProductsList: React.FC = () => {
 
   const {

@@ -5,27 +5,33 @@ import { findProducts } from '../../../services/products.service';
 
 export interface ProductListContextProps {
   products: Product[];
+  allProducts: Product[];
   loadingProducts: boolean;
   currentPage: number;
   pages: number;
+  selectedProduct?: Product;
   changePage: (nextPage: number) => void;
   filterProductsList: (filter: string) => void;
   loadProducts: () => Promise<void>;
+  selectProduct: (product?: Product) => void;
 }
 
 export const ProductListContext = React.createContext<ProductListContextProps>({
   products: [],
+  allProducts: [],
   loadingProducts: false,
   currentPage: 0,
   pages: 1,
   changePage: () => { },
   filterProductsList: () => { },
   loadProducts: async () => { },
+  selectProduct: () => { },
 });
 
 const ProductsListProvider: React.FC = ({ children }) => {
 
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(undefined);
   const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [pages, setPages] = useState<number>(1);
@@ -52,13 +58,16 @@ const ProductsListProvider: React.FC = ({ children }) => {
   const filterProductsList = (filter: string) => setFilter(filter);
 
   return <ProductListContext.Provider value={{
+    allProducts: products,
     products: filteredProducts,
     loadingProducts,
     currentPage,
     changePage,
     filterProductsList,
     loadProducts,
-    pages
+    pages,
+    selectedProduct,
+    selectProduct: setSelectedProduct
   }}>
     {children}
   </ProductListContext.Provider>;
