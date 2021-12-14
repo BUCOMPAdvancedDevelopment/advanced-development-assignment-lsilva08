@@ -32,7 +32,7 @@ const ProductsDetail: React.FC = () => {
         gap={12}
       >
         <ItemImage />
-        <ItemDetails />
+        <ItemDetails description={product?.description || ''} />
         <BuyButton />
       </Grid>
     </VStack>

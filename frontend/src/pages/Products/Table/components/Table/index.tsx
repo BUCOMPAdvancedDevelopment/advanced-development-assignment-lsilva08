@@ -4,8 +4,7 @@ import { Product } from '../../../../../typings';
 import { ProductListContext, ProductListContextProps } from '../../../../../contexts/products/list';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import UpsertDialog from '../UpsertDialog';
-
-// import { Container } from './styles';
+import ProductsUpsertProvider from '../../../../../contexts/products/upsert';
 
 const ProductsTableTable: React.FC = () => {
 
@@ -23,13 +22,14 @@ const ProductsTableTable: React.FC = () => {
     }
 
     return (
-        <>
+        <ProductsUpsertProvider>
             <Table variant="simple">
                 <TableCaption>Imperial to metric conversion factors</TableCaption>
                 <Thead>
                     <Tr>
                         <Th>ID</Th>
-                        <Th>name</Th>
+                        <Th>Name</Th>
+                        <Th>Description</Th>
                         <Th isNumeric>Price</Th>
                         <Th isNumeric><Button onClick={onCreate} colorScheme="blue">New</Button></Th>
                     </Tr>
@@ -39,6 +39,7 @@ const ProductsTableTable: React.FC = () => {
                         <Tr>
                             <Td>{product.id}</Td>
                             <Td>{product.name}</Td>
+                            <Td>{product.description}</Td>
                             <Td isNumeric>R${product.price.toFixed(2)}</Td>
                             <Td>
                                 <HStack display="flex" justifyContent="flex-end" spacing={4}>
@@ -61,12 +62,14 @@ const ProductsTableTable: React.FC = () => {
                     <Tr>
                         <Th>ID</Th>
                         <Th>name</Th>
+                        <Th>Description</Th>
                         <Th isNumeric>Price</Th>
+                        <Th isNumeric><Button onClick={onCreate} colorScheme="blue">New</Button></Th>
                     </Tr>
                 </Tfoot>
             </Table>
             <UpsertDialog isOpen={isOpen} onClose={onClose} />
-        </>
+        </ProductsUpsertProvider>
     )
 }
 
