@@ -12,6 +12,8 @@ import Navbar from '../../components/Navbar';
 import ProductsList from '../../pages/Products/List';
 import ProductDetailsContextProvider from '../../contexts/products/details';
 import ProductsDetail from '../../pages/Products/Detail';
+import OrderListContextProvider from '../../contexts/orders';
+import OrderList from '../../pages/Order/List';
 
 const AppRoutes: React.FC = () => {
     return <Router>
@@ -34,6 +36,13 @@ const AppRoutes: React.FC = () => {
                         <ProductDetailsContextProvider>
                             <ProductsDetail />
                         </ProductDetailsContextProvider>
+                    </Navbar>
+                } />
+                <Route path="/orders" element={
+                    <Navbar>
+                        <OrderListContextProvider>
+                            <OrderList />
+                        </OrderListContextProvider>
                     </Navbar>
                 } />
             </Routes>

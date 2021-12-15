@@ -11,3 +11,18 @@ export type User = {
     email: string;
     profile: string;
 }
+
+export type Order = {
+    id: number;
+    customer: User,
+    products: Product[],
+    value: number;
+    trackingCode: string;
+    createdAt: string;
+}
+
+export type Tracking = {
+    address: string;
+    latitude: number;
+    longitude: number;
+}
