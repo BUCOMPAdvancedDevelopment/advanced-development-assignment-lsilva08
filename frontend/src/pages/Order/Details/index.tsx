@@ -1,15 +1,9 @@
-import React, { useContext } from 'react';
-import { AuthenticationContext, AuthenticationContextProps } from '../../../contexts/authentication';
-import Admin from './Admin';
+import React from 'react';
 import User from './User';
-
-// import { Container } from './styles';
 
 const OrderDetails: React.FC = () => {
 
-    const { profile } = useContext<AuthenticationContextProps>(AuthenticationContext)
-
-    return profile === 'admin' ? <Admin /> : <User />;
+    return <User />;
 }
 
 export default OrderDetails;

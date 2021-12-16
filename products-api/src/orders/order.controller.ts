@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { OrderCreateDto, OrderDto } from './dto';
+import { OrderCreateDto, OrderDto, Tracking } from './dto';
 import { Order } from './order.entity';
 import { OrderService } from './order.service';
 
@@ -36,7 +36,20 @@ export class OrderController {
   }
 
   @Delete('/:id')
-  remove(@Param() id: string): Promise<void> {
+  remove(@Param('id') id: string): Promise<void> {
     return this.orderService.remove(id);
+  }
+
+  @Get('/:id/tracking')
+  orderTracking(@Param('id') id: string): Promise<any> {
+    return this.orderService.orderTracking(id);
+  }
+
+  @Post('/:id/tracking')
+  upsertOrderTracking(
+    @Param('id') id: string,
+    @Body() tracking: Tracking,
+  ): Promise<any> {
+    return this.orderService.upsertOrderTracking(id, tracking);
   }
 }

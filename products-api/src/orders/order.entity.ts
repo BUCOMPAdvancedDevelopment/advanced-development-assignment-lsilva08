@@ -6,7 +6,9 @@ import {
   CreateDateColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
+import { OrderItem } from './item/order-item.entity';
 
 @Entity()
 export class Order {
@@ -25,7 +27,6 @@ export class Order {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToMany(() => Product)
-  @JoinTable()
-  products: Product[];
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
+  items: OrderItem[];
 }

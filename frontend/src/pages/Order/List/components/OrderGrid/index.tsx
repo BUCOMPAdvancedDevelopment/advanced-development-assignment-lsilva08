@@ -11,7 +11,7 @@ const OrderGrid: React.FC = () => {
 
     return <SimpleGrid columns={[2, 2, 2, 4]} spacing={10}>
         {orders.map(order => (
-            <Box><OrderCard order={order} /></Box>
+            <Box key={order.id}><OrderCard order={order} /></Box>
         ))}
     </SimpleGrid>;
 }

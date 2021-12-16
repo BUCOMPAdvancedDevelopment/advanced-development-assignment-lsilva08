@@ -45,7 +45,7 @@ const ProductsGrid: React.FC = () => {
                     <SimpleGrid columns={[2, 2, 2, 4]} spacing={10}>
                         {
                             products?.map((product) => (
-                                <Box><ProductCard product={product} /></Box>
+                                <Box key={product.id}><ProductCard product={product} /></Box>
                             ))
                         }
                     </SimpleGrid>

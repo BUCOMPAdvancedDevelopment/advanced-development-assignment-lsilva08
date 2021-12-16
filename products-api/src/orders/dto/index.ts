@@ -12,3 +12,9 @@ export type OrderDto = {
   value: number;
   trackingCode: string;
 };
+
+export type Tracking = {
+  address: string;
+  latitude: number;
+  longitude: number[];
+};

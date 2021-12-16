@@ -396,3 +396,7 @@ Temporary Items
 # Local
 .env
 dist
+
+
+# Key GCP
+src/config/ad-assignment-2021-334714-0972f79ff8e8.json

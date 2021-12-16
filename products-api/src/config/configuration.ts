@@ -6,4 +6,7 @@ export default () => ({
     name: process.env.DATABASE_NAME || 'products_api',
     port: parseInt(process.env.DATABASE_PORT, 10) || 3306,
   },
+  google: {
+    project: process.env.PROJECT_ID || 'ad-assignment-2021-334714',
+  },
 });

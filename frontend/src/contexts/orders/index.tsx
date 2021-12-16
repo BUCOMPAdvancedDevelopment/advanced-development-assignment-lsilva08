@@ -36,8 +36,7 @@ const OrderListContextProvider: React.FC = ({ children }) => {
 
     const filteredOrders = useMemo(
         () => orders
-            .filter(order => order.products
-                .some(product => filter ? product.name.includes(filter) : true)
+            .filter(order => order.items.some(item => filter ? item.product.name.includes(filter) : true)
             ),
         [filter, orders]
     )

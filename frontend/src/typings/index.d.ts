@@ -15,10 +15,19 @@ export type User = {
 export type Order = {
     id: number;
     customer: number, //User
-    products: Product[],
+    items: [
+        { id: number, quantity: number, product: Product }
+    ]
     value: number;
     trackingCode: string;
     createdAt: string;
+}
+
+export type OrderTracking = {
+    id: string;
+    positions: [
+        { address: string, latitude: number, longitude: number }
+    ]
 }
 
 export type Tracking = {
