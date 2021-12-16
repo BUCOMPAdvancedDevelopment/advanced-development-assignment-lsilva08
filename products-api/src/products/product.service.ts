@@ -9,7 +9,7 @@ export class ProductService {
   constructor(
     @InjectRepository(Product)
     private productsRepository: Repository<Product>,
-  ) {}
+  ) { }
 
   findAll(): Promise<Product[]> {
     return this.productsRepository.find();
@@ -17,6 +17,10 @@ export class ProductService {
 
   create(product: ProductDto): Promise<Product> {
     return this.productsRepository.save(product);
+  }
+
+  update(id: number, product: ProductDto): Promise<Product> {
+    return this.productsRepository.save({ id, ...product });
   }
 
   findOne(id: string): Promise<Product> {

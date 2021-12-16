@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { findProductById } from "../../../services/products.service";
+import { buyProduct, findProductById } from "../../../services/products.service";
 import { Product } from "../../../typings";
 
 export interface ProductDetailsContextProps {
@@ -41,11 +41,11 @@ const ProductDetailsContextProvider: React.FC = ({ children }) => {
         }, 3000)
     }
 
-    const buyProduct = async (productId: number): Promise<boolean> => {
+    const buy = async (userId: number, productId: number, quantity: number): Promise<boolean> => {
         setBuying(true);
         let bought;
         try {
-            await findProductById(productId);
+            await buyProduct(userId, productId, quantity);
             setBuying(false);
             bought = true;
         } catch (err) {
@@ -64,7 +64,7 @@ const ProductDetailsContextProvider: React.FC = ({ children }) => {
             loadProduct,
             loaded,
             buying,
-            buyProduct
+            buyProduct: buy
         }}>
             {children}
         </ProductDetailsContext.Provider>

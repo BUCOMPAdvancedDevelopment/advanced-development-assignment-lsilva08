@@ -8,6 +8,7 @@ export interface ProductListContextProps {
   allProducts: Product[];
   loadingProducts: boolean;
   currentPage: number;
+  error: string;
   pages: number;
   selectedProduct?: Product;
   changePage: (nextPage: number) => void;
@@ -21,6 +22,7 @@ export const ProductListContext = React.createContext<ProductListContextProps>({
   allProducts: [],
   loadingProducts: false,
   currentPage: 0,
+  error: '',
   pages: 1,
   changePage: () => { },
   filterProductsList: () => { },
@@ -36,12 +38,19 @@ const ProductsListProvider: React.FC = ({ children }) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [pages, setPages] = useState<number>(1);
   const [filter, setFilter] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const loadProducts = async () => {
     setLoadingProducts(true);
-    const foundProducts = await findProducts();
-    setProducts(foundProducts);
-    setLoadingProducts(false);
+    try {
+      const foundProducts = await findProducts();
+      setProducts(foundProducts);
+    } catch (error: any) {
+      setProducts([]);
+      setError(error.message)
+    } finally {
+      setLoadingProducts(false);
+    }
   }
 
   const filteredProducts = useMemo(() => {
@@ -67,7 +76,8 @@ const ProductsListProvider: React.FC = ({ children }) => {
     loadProducts,
     pages,
     selectedProduct,
-    selectProduct: setSelectedProduct
+    selectProduct: setSelectedProduct,
+    error
   }}>
     {children}
   </ProductListContext.Provider>;

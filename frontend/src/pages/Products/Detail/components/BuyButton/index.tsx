@@ -11,7 +11,7 @@ const BuyButton: React.FC = () => {
     const toast = useToast()
 
     const buy = async () => {
-        const buyResponse = await buyProduct(user!!.id, product!!.id, quantity);
+        const buyResponse = await buyProduct(1, product!!.id, quantity);
         if (buyResponse) {
             toast({
                 title: 'Bougth with sucess!',

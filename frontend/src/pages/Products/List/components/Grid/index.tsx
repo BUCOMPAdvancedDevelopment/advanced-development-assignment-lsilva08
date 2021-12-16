@@ -6,17 +6,29 @@ import ProductPagination from './components/ProductPagination';
 import ProductFilter from './components/ProductFilter';
 import ProductCard from './components/ProductCard';
 import Loader from '../../../../../components/Loader';
+import { useToast } from '@chakra-ui/toast';
 
 const ProductsGrid: React.FC = () => {
 
     const {
-        products, loadProducts, loadingProducts,
+        products, loadProducts, loadingProducts, error
     } = useContext<ProductListContextProps>(ProductListContext);
+    const toast = useToast()
 
     useEffect(() => {
         loadProducts();
         return () => { }
     }, [])
+
+    useEffect(() => {
+        error && toast({
+            title: 'Unexpected error',
+            description: error,
+            status: 'error',
+            duration: 3500,
+            isClosable: true
+        });
+    }, [error])
 
     return (
         <VStack
