@@ -36,7 +36,7 @@ const ProductsTableTable: React.FC = () => {
                 </Thead>
                 <Tbody>
                     {allProducts?.map((product: Product) => (
-                        <Tr>
+                        <Tr key={product.id}>
                             <Td>{product.id}</Td>
                             <Td>{product.name}</Td>
                             <Td>{product.description}</Td>

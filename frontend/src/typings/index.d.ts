@@ -14,7 +14,7 @@ export type User = {
 
 export type Order = {
     id: number;
-    customer: User,
+    customer: number, //User
     products: Product[],
     value: number;
     trackingCode: string;

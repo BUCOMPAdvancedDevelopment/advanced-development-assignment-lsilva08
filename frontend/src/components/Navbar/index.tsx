@@ -19,11 +19,13 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { useNavigate } from "react-router-dom";
 
-const Links = ['Menu1', 'Menu2', 'Menu3'];
+const Links = ['Products', 'Orders'];
 
-const NavLink = ({ children }: { children: ReactNode }) => (
+const NavLink = ({ children, onClick }: { children: ReactNode, onClick: () => void; }) => (
     <Link
+        onClick={onClick}
         px={2}
         py={1}
         rounded={'md'}
@@ -39,6 +41,11 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 const Navbar: React.FC = ({ children }) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    let navigate = useNavigate();
+
+    const handleClick = (route: string) => {
+        navigate(`/${route.toLowerCase()}`)
+    }
 
     return (
         <>
@@ -58,7 +65,7 @@ const Navbar: React.FC = ({ children }) => {
                             spacing={4}
                             display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
+                                <NavLink onClick={() => { handleClick(link) }} key={link}>{link}</NavLink>
                             ))}
                         </HStack>
                     </HStack>
@@ -82,7 +89,7 @@ const Navbar: React.FC = ({ children }) => {
                                 />
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>Link 1</MenuItem>
+                                <MenuItem onClick={() => { handleClick('orders') }}>My orders</MenuItem>
                                 <MenuDivider />
                                 <MenuItem>Link 2</MenuItem>
                             </MenuList>
@@ -94,7 +101,7 @@ const Navbar: React.FC = ({ children }) => {
                     <Box pb={4} display={{ md: 'none' }}>
                         <Stack as={'nav'} spacing={4}>
                             {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
+                                <NavLink onClick={() => { handleClick(link) }} key={link}>{link}</NavLink>
                             ))}
                         </Stack>
                     </Box>

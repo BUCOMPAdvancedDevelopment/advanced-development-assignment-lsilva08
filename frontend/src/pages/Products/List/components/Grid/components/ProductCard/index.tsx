@@ -10,15 +10,20 @@ import {
 } from '@chakra-ui/react';
 import { FiShoppingCart } from 'react-icons/fi';
 import { Product } from '../../../../../../../typings';
+import { useNavigate } from 'react-router';
 
 interface ProductCardProps {
     product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+
+    const navigate = useNavigate();
+
     return (
         <Flex p={50} w="full" alignItems="center" justifyContent="center">
             <Box
+                onClick={() => { navigate(`/products/${product.id}`) }}
                 bg={useColorModeValue('white', 'gray.800')}
                 maxW="sm"
                 borderWidth="1px"

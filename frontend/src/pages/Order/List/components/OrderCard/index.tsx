@@ -17,7 +17,7 @@ const OrderCard: React.FC<OrderCardParams> = ({ order }) => {
             justifyContent="space-between">
             <VStack mr="20" spacing={0}>
                 <Text w="full" textAlign={'left'} maxW={'4xl'}>
-                    Customer: {order.customer.name}
+                    Customer: {order.customer}
                 </Text>
                 <Text w="full" textAlign={'left'} maxW={'4xl'}>
                     Value: {order.value}
@@ -29,13 +29,13 @@ const OrderCard: React.FC<OrderCardParams> = ({ order }) => {
         <Box>
             <Text fontWeight="semibold">Products</Text>
             {order.products.map(product => (
-                <>
+                <div key={product.id}>
                     <Box display="flex" alignItems="center">
                         1x <Text ml="2" mr="2" fontWeight="bold">{product.name}</Text>
                         <Text textAlign="right" w="full" >${product.price}</Text>
                     </Box>
                     <Divider />
-                </>
+                </div>
             ))}
         </Box>
     </Stack>;
