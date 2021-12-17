@@ -3,6 +3,7 @@ import { AuthenticationPageContext, AuthenticationPageContextProps } from '../..
 import UnauthenticatedRoute from '../../components/RouteWrappers/UnauthenticatedRoute';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
+import { Center, Divider, HStack } from '@chakra-ui/layout';
 
 const Authentication: React.FC = () => {
 
@@ -13,7 +14,13 @@ const Authentication: React.FC = () => {
     }, [currentScreen])
 
     return <UnauthenticatedRoute>
-        {renderedScreen}
+        <HStack display={"flex"} w={"full"} justifyContent={"space-evenly"} spacing={10}>
+            <Signin></Signin>
+            <Center height='200px'>
+                <Divider color={"white"} orientation='vertical' />
+            </Center>
+            <Signup></Signup>
+        </HStack>
     </UnauthenticatedRoute>
 }
 

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Routes,
+    Navigate,
     Route
 } from "react-router-dom";
 import AuthenticationProvider, { AuthenticationContext, AuthenticationContextProps } from '../../contexts/authentication';
@@ -17,6 +18,8 @@ import OrderDetailsContextProvider from '../../contexts/orders/details';
 import OrderList from '../../pages/Order/List';
 import OrderDetails from '../../pages/Order/Details';
 import AuthenticatedRoute from '../../components/RouteWrappers/AuthenticatedRoute';
+import Signin from '../../pages/Authentication/components/Signin';
+import Signup from '../../pages/Authentication/components/Signup';
 
 const AppRoutes: React.FC = () => {
 
@@ -34,6 +37,16 @@ const AppRoutes: React.FC = () => {
             <Route path="/" element={
                 <AuthenticationPageProvider>
                     <Authentication />
+                </AuthenticationPageProvider>
+            } />
+            <Route path="/signin" element={
+                <AuthenticationPageProvider>
+                    <Signin />
+                </AuthenticationPageProvider>
+            } />
+            <Route path="/signup" element={
+                <AuthenticationPageProvider>
+                    <Signup />
                 </AuthenticationPageProvider>
             } />
             <Route path="/products" element={

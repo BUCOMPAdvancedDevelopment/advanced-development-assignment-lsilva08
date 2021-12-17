@@ -24,6 +24,8 @@ import {
 
 import { AuthenticationPageContext, AuthenticationPageContextProps } from '../../../../contexts/authentication/page';
 import { AuthenticationContext, AuthenticationContextProps } from '../../../../contexts/authentication';
+import UnauthenticatedRoute from '../../../../components/RouteWrappers/UnauthenticatedRoute';
+import { useNavigate } from 'react-router';
 
 const Signup: React.FC = () => {
 
@@ -35,8 +37,6 @@ const Signup: React.FC = () => {
     const [wrongConfirmPassword, setWrongConfirmPassword] = useState<boolean>(false);
 
     const { register, authenticating } = useContext<AuthenticationContextProps>(AuthenticationContext);
-    const { setCurrentScreen } = useContext<AuthenticationPageContextProps>(AuthenticationPageContext);
-    const backToSignIn = () => setCurrentScreen('signin')
 
     const signup = () => {
         setWrongConfirmPassword(false);
@@ -53,8 +53,7 @@ const Signup: React.FC = () => {
         <Flex
             minH={'100vh'}
             align={'center'}
-            justify={'center'}
-            bg={useColorModeValue('gray.50', 'gray.800')}>
+            justify={'center'}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Stack align={'center'}>
                     <Heading fontSize={'4xl'} textAlign={'center'}>
@@ -135,11 +134,6 @@ const Signup: React.FC = () => {
                                 }}>
                                 Sign up
                             </Button>
-                        </Stack>
-                        <Stack pt={6}>
-                            <Text align={'center'}>
-                                Already a user? <Link onClick={backToSignIn} color={'blue.400'}>Sign in</Link>
-                            </Text>
                         </Stack>
                     </Stack>
                 </Box>

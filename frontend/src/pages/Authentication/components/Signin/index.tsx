@@ -14,8 +14,9 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-import { AuthenticationPageContext, AuthenticationPageContextProps } from '../../../../contexts/authentication/page';
 import { AuthenticationContext, AuthenticationContextProps } from '../../../../contexts/authentication';
+import UnauthenticatedRoute from '../../../../components/RouteWrappers/UnauthenticatedRoute';
+import { useNavigate } from 'react-router';
 
 
 const Signin: React.FC = () => {
@@ -23,20 +24,17 @@ const Signin: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const { authenticate, authenticating } = useContext<AuthenticationContextProps>(AuthenticationContext);
-    const { setCurrentScreen } = useContext<AuthenticationPageContextProps>(AuthenticationPageContext);
-
-    const goToSignUp = () => setCurrentScreen('signup')
     const login = () => {
         //some validations
         authenticate(email, password);
     }
 
     return (
+        // <UnauthenticatedRoute>
         <Flex
             minH={'100vh'}
             align={'center'}
-            justify={'center'}
-            bg={useColorModeValue('gray.50', 'gray.800')}>
+            justify={'center'}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Stack align={'center'}>
                     <Heading fontSize={'4xl'}>Sign in to your account</Heading>
@@ -72,15 +70,13 @@ const Signin: React.FC = () => {
                                 }}>
                                 Sign in
                             </Button>
-
-                            <Text align={'center'}>
-                                Don't have an account yet? <Link onClick={goToSignUp} color={'blue.400'}>Sign up!</Link>
-                            </Text>
                         </Stack>
                     </Stack>
                 </Box>
             </Stack>
         </Flex>
+
+        // </UnauthenticatedRoute>
     )
 }
 
