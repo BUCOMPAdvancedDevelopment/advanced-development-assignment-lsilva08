@@ -7,6 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { Headers } from '@nestjs/common';
 import { OrderCreateDto, OrderDto, Tracking } from './dto';
 import { Order } from './order.entity';
 import { OrderService } from './order.service';
@@ -16,8 +17,9 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) { }
 
   @Get()
-  findAll(): Promise<Order[]> {
-    return this.orderService.findAll();
+  findAll(@Headers() headers): Promise<Order[]> {
+    console.log('headers', headers)
+    return this.orderService.findAll(headers['authorization']);
   }
 
   @Post()
@@ -26,8 +28,9 @@ export class OrderController {
   }
 
   @Get('/:id')
-  findOne(@Param() id: string): Promise<Order> {
-    return this.orderService.findOne(id);
+  findOne(@Param() id: string, @Headers() headers): Promise<Order> {
+    console.log('headers', headers)
+    return this.orderService.findOne(id, headers['authorization']);
   }
 
   @Put('/:id')

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import {
     Box,
     Flex,
@@ -20,6 +20,7 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useNavigate } from "react-router-dom";
+import { AuthenticationContext, AuthenticationContextProps } from '../../contexts/authentication';
 
 const Links = ['Products', 'Orders'];
 
@@ -43,8 +44,16 @@ const Navbar: React.FC = ({ children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     let navigate = useNavigate();
 
+    const { clearAuthData } = useContext<AuthenticationContextProps>(AuthenticationContext);
+
     const handleClick = (route: string) => {
         navigate(`/${route.toLowerCase()}`)
+    }
+
+    const logout = () => {
+
+        clearAuthData()
+        navigate('/')
     }
 
     return (
@@ -91,7 +100,7 @@ const Navbar: React.FC = ({ children }) => {
                             <MenuList>
                                 <MenuItem onClick={() => { handleClick('orders') }}>My orders</MenuItem>
                                 <MenuDivider />
-                                <MenuItem>Link 2</MenuItem>
+                                <MenuItem onClick={logout}>Logout</MenuItem>
                             </MenuList>
                         </Menu>
                     </Flex>

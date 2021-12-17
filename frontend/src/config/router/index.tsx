@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Routes,
     Route
 } from "react-router-dom";
-import AuthenticationProvider from '../../contexts/authentication';
+import AuthenticationProvider, { AuthenticationContext, AuthenticationContextProps } from '../../contexts/authentication';
 import AuthenticationPageProvider from '../../contexts/authentication/page';
 import ProductsListProvider from '../../contexts/products/list';
 import Authentication from '../../pages/Authentication';
@@ -16,46 +16,63 @@ import OrderListContextProvider from '../../contexts/orders';
 import OrderDetailsContextProvider from '../../contexts/orders/details';
 import OrderList from '../../pages/Order/List';
 import OrderDetails from '../../pages/Order/Details';
+import AuthenticatedRoute from '../../components/RouteWrappers/AuthenticatedRoute';
 
 const AppRoutes: React.FC = () => {
+
+    const { user, restoreAuthData } = useContext<AuthenticationContextProps>(AuthenticationContext);
+    if (!user) {
+        const localStorageData = localStorage.getItem('@userData')
+        if (localStorageData) {
+            const data = JSON.parse(localStorageData);
+            restoreAuthData(data)
+        }
+    }
+
     return <Router>
-        <AuthenticationProvider>
-            <Routes>
-                <Route path="/" element={
-                    <AuthenticationPageProvider>
-                        <Authentication />
-                    </AuthenticationPageProvider>
-                } />
-                <Route path="/products" element={
+        <Routes>
+            <Route path="/" element={
+                <AuthenticationPageProvider>
+                    <Authentication />
+                </AuthenticationPageProvider>
+            } />
+            <Route path="/products" element={
+                <AuthenticatedRoute>
                     <Navbar>
                         <ProductsListProvider>
                             <ProductsList />
                         </ProductsListProvider>
                     </Navbar>
-                } />
-                <Route path="/products/:productId" element={
+                </AuthenticatedRoute>
+            } />
+            <Route path="/products/:productId" element={
+                <AuthenticatedRoute>
                     <Navbar>
                         <ProductDetailsContextProvider>
                             <ProductsDetail />
                         </ProductDetailsContextProvider>
                     </Navbar>
-                } />
-                <Route path="/orders" element={
+                </AuthenticatedRoute>
+            } />
+            <Route path="/orders" element={
+                <AuthenticatedRoute>
                     <Navbar>
                         <OrderListContextProvider>
                             <OrderList />
                         </OrderListContextProvider>
                     </Navbar>
-                } />
-                <Route path="/orders/:orderId" element={
+                </AuthenticatedRoute>
+            } />
+            <Route path="/orders/:orderId" element={
+                <AuthenticatedRoute>
                     <Navbar>
                         <OrderDetailsContextProvider>
                             <OrderDetails />
                         </OrderDetailsContextProvider>
                     </Navbar>
-                } />
-            </Routes>
-        </AuthenticationProvider>
+                </AuthenticatedRoute>
+            } />
+        </Routes>
     </Router>
 }
 

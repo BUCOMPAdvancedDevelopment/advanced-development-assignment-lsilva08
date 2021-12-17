@@ -7,6 +7,7 @@ import { OrderItem } from './item/order-item.entity';
 import { Order } from './order.entity';
 import { Datastore } from '@google-cloud/datastore';
 import { ConfigService } from '@nestjs/config';
+import { User } from '../users/user.entity';
 
 @Injectable()
 export class OrderService {
@@ -19,6 +20,8 @@ export class OrderService {
     private productsRepository: Repository<Product>,
     @InjectRepository(OrderItem)
     private orderItemRepository: Repository<OrderItem>,
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
     private configService: ConfigService,
   ) {
     this.datastore = new Datastore({
@@ -27,8 +30,11 @@ export class OrderService {
     });
   }
 
-  findAll(): Promise<Order[]> {
+  async findAll(userId: string): Promise<Order[]> {
+    const user = await this.usersRepository.findOne({ id: userId });
+    console.log('user: ', user)
     return this.ordersRepository.find({
+      ...(user.profile !== 'admin' && { where: { customer: user.id } }),
       relations: ['items', 'items.product'],
     });
   }
@@ -65,7 +71,6 @@ export class OrderService {
     );
 
     const trackingKey = this.datastore.key(['Tracking', savedOrder.id]);
-    console.log('key:', trackingKey);
 
     const tracking = {
       key: trackingKey,
@@ -89,8 +94,10 @@ export class OrderService {
     return this.ordersRepository.save({ id, ...order });
   }
 
-  findOne(id: string): Promise<Order> {
+  async findOne(id: string, userId: string): Promise<Order> {
+    const user = await this.usersRepository.findOne({ id: userId });
     return this.ordersRepository.findOne(id, {
+      ...(user.profile !== 'admin' && { where: { customer: user.id } }),
       relations: ['items', 'items.product'],
     });
   }

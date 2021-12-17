@@ -6,19 +6,29 @@ export interface AuthenticationContextProps {
     authenticated?: boolean;
     token?: string;
     user?: {
-        id: number;
+        id: string;
         email: string;
     };
     profile?: string;
     authenticating: boolean;
     authenticate: (email: string, password: string) => Promise<void>;
     register: (name: string, email: string, password: string) => Promise<void>;
+    restoreAuthData: (
+        user: {
+            id: string;
+            email: string;
+            profile: string;
+        },
+    ) => void;
+    clearAuthData: () => void;
 }
 
 export const AuthenticationContext = createContext<AuthenticationContextProps>({
     authenticate: async () => { },
     register: async () => { },
     authenticating: false,
+    restoreAuthData: () => { },
+    clearAuthData: () => { }
 });
 
 
@@ -27,21 +37,31 @@ const AuthenticationProvider: React.FC = ({ children }) => {
     const [authenticating, setAuthenticating] = useState<boolean>(false);
     const [authenticated, setAuthenticated] = useState<boolean>(false);
     const [token, setToken] = useState<string>();
-    const [user, setUser] = useState<{ id: number, email: string }>({ id: 1, email: 'test' });
-    const [profile, setProfile] = useState<string>('');
+    const [user, setUser] = useState<{ id: string, email: string }>();
+    const [profile, setProfile] = useState<string>();
 
     const authenticate = async (email: string, password: string) => {
         setAuthenticating(true);
-        const response = await signin(email, password);
-        fillSigninData(response);
-        setAuthenticating(false);
+        try {
+            const response = await signin(email, password);
+            fillSigninData(response);
+        } catch (err) {
+            alert('Usuário e/ou senha inválidos')
+        } finally {
+            setAuthenticating(false);
+        }
     }
 
     const register = async (name: string, email: string, password: string) => {
         setAuthenticating(true);
-        const response = await signup(name, email, password);
-        fillSigninData(response);
-        setAuthenticating(false);
+        try {
+            const response = await signup(name, email, password);
+            fillSigninData(response);
+        } catch (err) {
+            alert('Usuário já existe')
+        } finally {
+            setAuthenticating(false);
+        }
     }
 
     const fillSigninData = (response: SigninResponse) => {
@@ -51,7 +71,25 @@ const AuthenticationProvider: React.FC = ({ children }) => {
         setAuthenticated(true);
     }
 
-    return <AuthenticationContext.Provider value={{ authenticated, token, user, profile, authenticate, register, authenticating }}>
+
+    const restoreAuthData = (
+        user: {
+            id: string;
+            email: string;
+            profile: string;
+        },
+    ) => {
+        setUser(user);
+        setProfile(profile)
+    }
+
+    const clearAuthData = () => {
+        localStorage.removeItem('@userData')
+        setUser(undefined)
+        setProfile(undefined)
+    }
+
+    return <AuthenticationContext.Provider value={{ authenticated, token, user, profile, authenticate, register, authenticating, restoreAuthData, clearAuthData }}>
         {children}
     </AuthenticationContext.Provider>;
 }

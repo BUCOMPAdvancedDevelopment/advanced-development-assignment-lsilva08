@@ -9,7 +9,7 @@ const OrderGrid: React.FC = () => {
 
     const { orders } = useContext<OrdersListContextProps>(OrderListContext);
 
-    return <SimpleGrid columns={[2, 2, 2, 4]} spacing={10}>
+    return <SimpleGrid columns={[2, 2, 2, 2]} spacing={10}>
         {orders.map(order => (
             <Box key={order.id}><OrderCard order={order} /></Box>
         ))}

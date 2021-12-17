@@ -6,9 +6,9 @@ import { AuthenticationContext, AuthenticationContextProps } from '../../../cont
 
 const AuthenticatedRoute: React.FC = ({ children }) => {
 
-    const { authenticated } = useContext<AuthenticationContextProps>(AuthenticationContext);
+    const { user } = useContext<AuthenticationContextProps>(AuthenticationContext);
 
-    if (!authenticated) {
+    if (!user) {
         return <Navigate replace to="/" />
     }
 

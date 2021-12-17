@@ -1,8 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { Order, OrderTracking } from "../../../typings";
 import { findOrderById } from "../../../services/orders.service";
 import { findTracking } from "../../../services/tracking.service";
 import { useDisclosure } from "@chakra-ui/hooks";
+import { AuthenticationContext, AuthenticationContextProps } from "../../authentication";
 
 export interface OrderDetailsContextProps {
     order?: Order;
@@ -26,6 +27,7 @@ export const OrderDetailsContext = createContext<OrderDetailsContextProps>({
 
 const OrderDetailsContextProvider: React.FC = ({ children }) => {
 
+    const { user } = useContext<AuthenticationContextProps>(AuthenticationContext);
     const [order, setOrder] = useState<Order>();
     const [orderTracking, setOrderTracking] = useState<OrderTracking>();
     const [loadingOrder, setLoadingOrder] = useState<boolean>(false);
@@ -36,7 +38,7 @@ const OrderDetailsContextProvider: React.FC = ({ children }) => {
         setLoadingOrder(true)
         setLoadedOrder(false)
         try {
-            const foundOrder = await findOrderById(id);
+            const foundOrder = await findOrderById(id, user?.id || '');
             setOrder(foundOrder);
             if (foundOrder) {
                 setLoadedOrder(true)

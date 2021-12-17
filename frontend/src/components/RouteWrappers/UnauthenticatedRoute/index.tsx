@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import {
     Navigate
 } from "react-router-dom";
@@ -6,13 +6,13 @@ import { AuthenticationContext, AuthenticationContextProps } from '../../../cont
 
 const UnauthenticatedRoute: React.FC = ({ children }) => {
 
-    const { authenticated } = useContext<AuthenticationContextProps>(AuthenticationContext);
+    const { user } = useContext<AuthenticationContextProps>(AuthenticationContext);
 
-    if (authenticated) {
-        return <Navigate replace to="/products" />
-    }
+    const renderedComponent = useMemo(() => {
+        return user ? <Navigate replace to="/products" /> : <>{children}</>;
+    }, [user])
 
-    return <>{children}</>;
+    return renderedComponent
 }
 
 export default UnauthenticatedRoute;

@@ -8,7 +8,7 @@ export interface ProductDetailsContextProps {
     loaded: boolean;
     loadProduct: (productId: number) => Promise<void>;
     buying: boolean;
-    buyProduct: (userId: number, productId: number, quantity: number) => Promise<boolean>;
+    buyProduct: (userId: string, productId: number, quantity: number) => Promise<boolean>;
 }
 
 export const ProductDetailsContext = createContext<ProductDetailsContextProps>({
@@ -41,7 +41,7 @@ const ProductDetailsContextProvider: React.FC = ({ children }) => {
         }, 3000)
     }
 
-    const buy = async (userId: number, productId: number, quantity: number): Promise<boolean> => {
+    const buy = async (userId: string, productId: number, quantity: number): Promise<boolean> => {
         setBuying(true);
         let bought;
         try {

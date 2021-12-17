@@ -11,7 +11,7 @@ const BuyButton: React.FC = () => {
     const toast = useToast()
 
     const buy = async () => {
-        const buyResponse = await buyProduct(1, product!!.id, quantity);
+        const buyResponse = await buyProduct(user!!.id, product!!.id, quantity);
         if (buyResponse) {
             toast({
                 title: 'Bougth with sucess!',
@@ -35,6 +35,7 @@ const BuyButton: React.FC = () => {
         <HStack w="150px" textAlign="center" >
             <Input type="number" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} />
             <Button onClick={buy} disabled={buying} colorScheme="blue" pl="8" pr="8" >Buy</Button>
+            {user?.id}
         </HStack>
     </GridItem>
 

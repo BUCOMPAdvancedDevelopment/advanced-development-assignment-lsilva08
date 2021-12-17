@@ -4,8 +4,6 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  ManyToMany,
-  JoinTable,
   OneToMany,
 } from 'typeorm';
 import { OrderItem } from './item/order-item.entity';
@@ -16,7 +14,7 @@ export class Order {
   id: number;
 
   @Column()
-  customer: number;
+  customer: string;
 
   @Column({ nullable: true })
   trackingCode: string;

@@ -21,9 +21,6 @@ const OrderCard: React.FC<OrderCardParams> = ({ order }) => {
             justifyContent="space-between">
             <VStack mr="20" spacing={0}>
                 <Text w="full" textAlign={'left'} maxW={'4xl'}>
-                    Customer: {order.customer}
-                </Text>
-                <Text w="full" textAlign={'left'} maxW={'4xl'}>
                     Value: {order.value}
                 </Text>
             </VStack>

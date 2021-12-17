@@ -1,6 +1,7 @@
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { findOrders } from "../../services/orders.service";
 import { Order } from "../../typings";
+import { AuthenticationContext, AuthenticationContextProps } from "../authentication";
 
 export interface OrdersListContextProps {
     orders: Order[];
@@ -18,6 +19,7 @@ export const OrderListContext = createContext<OrdersListContextProps>({
 
 const OrderListContextProvider: React.FC = ({ children }) => {
 
+    const { user } = useContext<AuthenticationContextProps>(AuthenticationContext);
     const [orders, setOrders] = useState<Order[]>([]);
     const [loadingOrders, setLoadingOrders] = useState<boolean>(false);
     const [filter, setFilter] = useState<string>('');
@@ -25,7 +27,7 @@ const OrderListContextProvider: React.FC = ({ children }) => {
     const loadOrders = async () => {
         setLoadingOrders(true);
         try {
-            const foundOrders = await findOrders();
+            const foundOrders = await findOrders(user?.id || '');
             setOrders(foundOrders);
         } catch (err) {
             setOrders([]);

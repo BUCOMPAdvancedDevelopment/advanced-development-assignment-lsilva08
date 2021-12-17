@@ -9,7 +9,7 @@ export const findProductById = async (productId: number): Promise<Product> => {
     return (await api.get(`/products/${productId}`)).data;
 }
 
-export const buyProduct = async (userId: number, productId: number, quantity: number): Promise<boolean> => {
+export const buyProduct = async (userId: string, productId: number, quantity: number): Promise<boolean> => {
     return api.post(`/orders`, {
         customer: userId,
         products: [{ id: productId, quantity }]

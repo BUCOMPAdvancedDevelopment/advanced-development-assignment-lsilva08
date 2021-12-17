@@ -9,6 +9,7 @@ import NotFound from '../../../../components/NotFound';
 import { AuthenticationContext, AuthenticationContextProps } from '../../../../contexts/authentication';
 import { OrderDetailsContext, OrderDetailsContextProps } from '../../../../contexts/orders/details';
 import UpsertDialog from '../components/UpsertDialog';
+import Maps from '../components/Maps';
 
 const UserOrderDetails: React.FC = () => {
 
@@ -35,6 +36,14 @@ const UserOrderDetails: React.FC = () => {
                                 src={`https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80`}
                                 roundedTop="lg"
                             />
+                        </Box>
+                        <Box textAlign={"center"}>
+                            <Text>
+                                Customer
+                            </Text>
+                            <Text>
+                                {order?.customer}
+                            </Text>
                         </Box>
                         <Box display={"flex"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"} w="full" borderWidth='1px' padding={5} borderRadius='lg' >
                             {order?.items?.map(item => (
@@ -64,7 +73,7 @@ const UserOrderDetails: React.FC = () => {
                             )}
                         </Box>
                         <Box borderWidth='1px' padding={5} borderRadius='lg' w="full" textAlign={"center"}>
-                            Google maps
+                            <Maps />
                         </Box>
                     </VStack>
                 </GridItem>
