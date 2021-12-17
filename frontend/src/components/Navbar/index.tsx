@@ -16,11 +16,14 @@ import {
     useColorMode,
     useColorModeValue,
     Stack,
+    Image,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useNavigate } from "react-router-dom";
 import { AuthenticationContext, AuthenticationContextProps } from '../../contexts/authentication';
+import Logo from '../../images/logo.png'
+
 
 const Links = ['Products', 'Orders'];
 
@@ -68,7 +71,13 @@ const Navbar: React.FC = ({ children }) => {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'}>
-                        <Box>Logo</Box>
+                        <Box>
+                            <Image
+                                w={30}
+                                src={Logo}
+                                roundedTop="lg"
+                            />
+                        </Box>
                         <HStack
                             as={'nav'}
                             spacing={4}

@@ -6,6 +6,7 @@ import {
     useColorModeValue,
     Icon,
     chakra,
+    Text,
     Tooltip,
 } from '@chakra-ui/react';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -61,9 +62,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     </Flex>
 
                     <Flex justifyContent="space-between" alignContent="center">
-                        <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-                            <Box as="span" color={'gray.600'} fontSize="lg">
-                                £
+                        <Box display={"flex"} justifyContent={"center"} alignItems={"center"} fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+                            <Box as="span" fontSize="lg">
+                                <Text mr="2" fontWeight="bold" color={"#4393ff"}>£</Text>
                             </Box>
                             {product.price.toFixed(2)}
                         </Box>
